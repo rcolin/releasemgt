@@ -7,6 +7,16 @@
   <name>releasemgt</name>
   <url>http://maven.apache.org</url>
 
+  <distributionManagement>
+    <repository>
+      <id>my-local-staging</id>
+      <url>file://${project.build.directory}/staging/</url>
+    </repository>
+    <snapshotRepository>
+      <id>my-local-snap-staging</id>
+      <url>file://${project.build.directory}/staging/</url>
+    </snapshotRepository>
+  </distributionManagement>
   <scm>
     <connection>scm:git:https://github.com/rcolin/releasemgt.git</connection>
     <!--<connection>scm:git:git@github.com:rcolin/releasemgt.git</connection>-->
@@ -21,6 +31,7 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <github.global.server>github</github.global.server>
   </properties>
 
   <build>
@@ -38,6 +49,25 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.3</version>
       </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.11</version>
+        <configuration>
+          <outputDirectory>${project.build.directory}/staging/</outputDirectory>
+          <includes><include>**/*</include></includes>
+          <repositoryOwner>rcolin</repositoryOwner>
+          <repositoryName>releasemgt</repositoryName>
+          <branch>refs/heads/master</branch>
+          <message>Deploy arctifact on github with ${project.version}</message>
+        </configuration>
+        <executions>
+          <execution>
+            <goals><goal>site</goal></goals>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -48,13 +78,5 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <!--
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-release-plugin</artifactId>
-      <version>2.5.3</version>
-      <type>maven-plugin</type>
-    </dependency>
-    -->
   </dependencies>
 </project>
