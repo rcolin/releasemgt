@@ -3,7 +3,7 @@
   <groupId>org.ubick.releasemgt</groupId>
   <artifactId>releasemgt</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <name>releasemgt</name>
   <url>http://maven.apache.org</url>
 
@@ -14,7 +14,6 @@
     <!--<developerConnection>scm:git:git@github.com:rcolin/releasemgt.git</developerConnection>-->
     <!--<tag>TAG</tag>-->
     
-    <tag>releasemgt-1.0</tag>
   </scm>
 
 
